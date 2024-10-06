@@ -5139,29 +5139,16 @@ case 'tovv': {
          const helpMenuText = `
 Hi😊,  *${pushname}*
 
-╭───────────────߷
-┃╭─────────────⟢
-┃╏⟣ 𝗘𝗰𝗼𝗕𝗼𝘁 𝗣𝗮𝘆𝗺𝗲𝗻𝘁 𝗕𝗼𝘁
-┃╰─────────────⟢
-┃  
-┃ ➮ Current Time is ${nowtime}
-┃ ➮ Todays date is ${kaidate}
-┃ ➮ Alive for ${runtime(process.uptime())}        
-┃
-╰───────────────߷
-╭──────────────⟞
-┆  *EcoBots  Menulist* 
-╰──────────────⟞ 
-╭─────────────── ⧉
-┃ 
-┃ ➮  1. Pay fees
-┃ ➮  2. Check students balance
-┃ ➮  3. Credit payment system
-┃ ➮  4. About developers
-┃ ➮  5. Exit
-┃ 
-┃  
-╰─────────────── ⧉
+I am  *Ecobot Digital Assistant* Your One in All chatabot that makes transaction through E-Pay convient.\n\n  To proceed  *choose one of the following options* by tapping the buttons below.
+
+ ➮  1. Pay fees directly to school bank account
+ ➮  2. Check students fees balance
+ ➮  3. Credit payment system
+ ➮  4. About developers
+ ➮  5. Exit
+
+  
+─────────────── 
 > ST MARY’S HIGH 
 _________________________`;
 
@@ -5191,30 +5178,30 @@ _________________________`;
                     buttons: [
                       {
                         "name": "quick_reply",
-                        "buttonParamsJson": `{"display_text":"Pay","id":'pay'}`
+                        "buttonParamsJson": `{"display_text":"PAY","id":'pay'}`
                       },
                       
                       {
                         "name": "quick_reply",
-                        "buttonParamsJson": `{"display_text":"Check","id":'check'}`
-                      },
-                      
-                      
-                      {
-                        "name": "quick_reply",
-                        "buttonParamsJson": `{"display_text":"Credit","id":'credit'}`
+                        "buttonParamsJson": `{"display_text":"CHECK BALANCE","id":'check'}`
                       },
                       
                       
                       {
                         "name": "quick_reply",
-                        "buttonParamsJson": `{"display_text":"Exit","id":'exit'}`
+                        "buttonParamsJson": `{"display_text":"CREDIT PAYMENT","id":'credit'}`
+                      },
+                      
+                      
+                      {
+                        "name": "quick_reply",
+                        "buttonParamsJson": `{"display_text":"EXIT","id":'exit'}`
                       },
                      
 
                       {
                         "name": "quick_reply",
-                        "buttonParamsJson": `{"display_text":"About","id":'about'}`
+                        "buttonParamsJson": `{"display_text":"ABOUT DEVELOPERS","id":'about'}`
                       },            
                     ]
                   })
@@ -5251,7 +5238,7 @@ if (!msg || !msg.key || !msg.key.remoteJid || !msg.key.id) {
           if (isBanChat) return reply(mess.bangc);
           Subzero.sendMessage(from, { react: { text: "✨", key: m.key } })
 
-          reply(`Hi ${pushname}👋 ,I am MAKINO-MD-V2 by ᴅᴀʀʀᴇʟʟ ᴍᴜᴄʜᴇʀɪ. Do you need any help ?`)
+          reply(`Hi ${pushname}👋 ,I am Ecobot by Darrell Mucheri. Do you need any help ?`)
         }
 
         break;
