@@ -16,7 +16,6 @@ const pm2 = require('pm2');
 const util = require("util");
 const { promisify } = require('util');
 const setTimeoutPromise = promisify(setTimeout);
-const chalk = require("chalk");
 const axios = require('axios');
 const { spawn, exec, execSync } = require("child_process");
 const moment = require("moment-timezone");
@@ -283,14 +282,6 @@ m.message.InteractiveResponseMessage.NativeFlowResponseMessage ||               
     const reply = (teks) => {
       Taira.sendMessage(m.chat,
       { text: teks,
-      contextInfo:{
-      mentionedJid:[sender],
-      forwardingScore: 9999999,
-      isForwarded: true,
-      forwardedNewsletterMessageInfo: {
-      newsletterName: "♱Click Me♱♡⃤",
-      newsletterJid: "120363320283062687@newsletter",
-      },
       "externalAdReply": {
       "showAdAttribution": true,
       "containsAutoReply": true,
@@ -299,7 +290,7 @@ m.message.InteractiveResponseMessage.NativeFlowResponseMessage ||               
       "previewType": "VIDEO",
       "thumbnailUrl": "https://graph.org/file/30265f2195f076e1bb3c3.jpg",
       "thumbnail": fs.readFileSync(`./Assets/pic7.jpg`),
-      "sourceUrl": `https://whatsapp.com/channel/0029Vag5l2ALSmbi14YryJ2r`}}},
+      "sourceUrl": `https://whatsapp.com/channel/0029Vag5l2ALSmbi14YryJ2r`}},
       { quoted: m})
 	  }
 	  
@@ -317,17 +308,19 @@ const v2features = () =>{
     }
 
     if (m.message) {
-      addBalance(m.sender, randomNomor(574), balance);
       console.log(
-        chalk.black(chalk.bgWhite(`[ NEW MESSAGE RECEIVED ]\n`)),
-        chalk.black(chalk.bgGreen(new Date())),
-        chalk.black(chalk.bgBlue(budy || m.mtype)) +
-        "\n" +
-        chalk.magenta("=> 💧Message From"),
-        chalk.green(pushname),
-        chalk.yellow(m.sender) + "\n" + chalk.blueBright(`=> 🌐 Message In\n`),
-        chalk.green(m.isGroup ? pushname : "🧩Private Chat", m.chat)
-      );
+        `[ NEW MESSAGE RECEIVED ]\n
+        ${new Date()}
+        ${budy || m.mtype}
+        
+        => 💧Message From
+        ${pushname}
+        ${m.sender}
+	
+	=> 🌐 Message In
+ 
+        ${m.isGroup ? pushname : "🧩Private Chat", m.chat}
+	`);
     }
 
     if (isCmd && !isUser) {
@@ -715,6 +708,12 @@ const smallinput = budy.toLowerCase();
 
 
     switch (command) {
+case 'clear': case 'clearchat': {
+	     if (!isCreator) return
+	     await Taira.chatModify({ delete: true, lastMessages: [{ key: m.key, messageTimestamp: m.messageTimestamp }] }, m.chat);
+             await reply('Chat Cleared.');
+	    }
+	break
 
 case 'addowner': {
 if (!isCreator) return reply(mess.botowner)
@@ -760,8 +759,8 @@ break
 
 case 'savecontact': case 'svcontact':{
 if (!m.isGroup) return reply(mess.grouponly)
-if (!isCreator) return reply(mess.botowner)
-let cmiggc = await Tairac.groupMetadata(m.chat)
+if (!isCreator) return
+let cmiggc = await Taira.groupMetadata(m.chat)
 let orgiggc = participants.map(a => a.id)
 vcard = ''
 noPort = 0
@@ -769,11 +768,11 @@ for (let a of cmiggc.participants) {
     vcard += `BEGIN:VCARD\nVERSION:3.0\nFN:[${noPort++}] +${a.id.split("@")[0]}\nTEL;type=CELL;type=VOICE;waid=${a.id.split("@")[0]}:+${a.id.split("@")[0]}\nEND:VCARD\n`
 }
 let nmfilect = './contacts.vcf'
-reply("Saving  '+cmiggc.participants.length+' participants contact")
+reply('Saving  ' + cmiggc.participants.length+' participants contact')
 require('fs').writeFileSync(nmfilect, vcard.trim())
 await sleep(2000)
 Taira.sendMessage(m.chat, {
-    document: require('fs').readFileSync(nmfilect), mimetype: 'text/vcard', fileName: 'MAKINO-MD-V2.vcf', caption: '\nDone saving.\nGroup Name: *'+cmiggc.subject+'*\nContacts: *'+cmiggc.participants.length+'*'
+    document: require('fs').readFileSync(nmfilect), mimetype: 'text/vcard', fileName: 'MAKINO-MD-V3.vcf', caption: '\nDone saving.\nGroup Name: *'+cmiggc.subject+'*\nContacts: *'+cmiggc.participants.length+'*'
 }, {ephemeralExpiration: 86400, quoted: m})
 require('fs').unlinkSync(nmfilect)
 }
@@ -5107,6 +5106,7 @@ case 'tovv': {
 ╭═══════════════ ⪩
 ┃ • Addowner
 ┃ • delowner
+┃ • clear
 ┃ • ᴘᴜʙʟɪᴄ
 ┃ • self
 ┃ • ʀᴇꜱᴛᴀʀᴛ
@@ -5148,7 +5148,7 @@ case 'tovv': {
 ┃ • ɢʀᴏᴜᴘʟɪɴᴋ
 ┃ • ɪɴᴠɪᴛᴇ
 ┃ • ᴀᴅᴅ
-┃ •  savecontact
+┃ • savecontact
 ┃ • kick
 ┃ • left
 ┃ • ꜱᴇᴛɴᴀᴍᴇ
@@ -5556,6 +5556,7 @@ let messg = `
 ╭═══════════════ ⪩
 ┃ • Addowner
 ┃ • Delowner
+┃ • clear
 ┃ • ᴘᴜʙʟɪᴄ
 ┃ • self
 ┃ • ʀᴇꜱᴛᴀʀᴛ
@@ -5594,7 +5595,7 @@ let messg = `
 ┃ • ɢʀᴏᴜᴘʟɪɴᴋ
 ┃ • ɪɴᴠɪᴛᴇ
 ┃ • ᴀᴅᴅ
-┃ •  savecontact
+┃ • savecontact
 ┃ • kick
 ┃ • left
 ┃ • Antibot
@@ -5988,7 +5989,7 @@ if (stdout) return reply(`${stdout}`)
 let file = require.resolve(__filename)
 fs.watchFile(file, () => {
   fs.unwatchFile(file)
-  console.log(chalk.redBright(`Update ${__filename}`))
+  console.log(`Update ${__filename}`)
   delete require.cache[file]
   require(file)
 })
