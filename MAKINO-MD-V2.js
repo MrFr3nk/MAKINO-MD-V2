@@ -5224,7 +5224,8 @@ _________________________`;
           }, {});
 
 
-          if (!msg || !msg.key || !msg.key.remoteJid || !msg.key.id) {
+          
+if (!msg || !msg.key || !msg.key.remoteJid || !msg.key.id) {
             const errorMessage = 'Error: Invalid message key.';
             console.error(errorMessage);
             return reply(errorMessage);
@@ -5233,76 +5234,17 @@ _________________________`;
           await Subzero.relayMessage(msg.key.remoteJid, msg.message, {
             messageId: msg.key.id
           });
-} else if(global.menutype === "v2"){
-  await Subzero.sendMessage(m.chat , { text: helpMenuText}, {quoted: statrp })
-  } else if (global.menutype === "v3"){
-  Subzero.sendMessage(m.chat, {
-video : { url: "https://graph.org/file/fad20d219e426d3c65e5f.mp4" }, 
-caption: helpMenuText,
-gifPlayback: true,
-contextInfo: {
-forwardingScore: 999,
-isForwarded: true,
-mentionedJid: [sender],
-forwardedNewsletterMessageInfo: {
-newsletterName: "♻️ Darrell Mucheri ♻️",
-newsletterJid: "120363320283062687@newsletter",
-},
-externalAdReply: {
-showAdAttribution: true,
-title: "🤖EcoBot - Digital 🤖",
-body: "♻️ Darrell Mucheri ♻️",
-thumbnailUrl: "https://telegra.ph/file/dfad7a7afb54498391945.jpg",
-sourceUrl: "https://whatsapp.com/channel/0029VaCt4oMKrWQuAzkMIS0Q",
-mediaType: 1,
-renderLargerThumbnail: true
-}
-}
-}, {
-quoted: m
-}) 
-} else if(global.menutype === "v4") {
-
-  Subzero.sendMessage(m.chat, {
-      video : { url: "https://graph.org/file/fad20d219e426d3c65e5f.mp4" },
-      gifPlayback: true,
-      caption: helpMenuText,
-      contextInfo: {
-      externalAdReply: {
-      title: '🤖EcoBot - Digital 🤖',
-      body: '♻️ Darrell Mucheri ♻️',
-      thumbnailUrl: "https://telegra.ph/file/dfad7a7afb54498391945.jpg",
-      sourceUrl: `https://whatsapp.com/channel/0029VaCt4oMKrWQuAzkMIS0Q`,
-      mediaType: 1,
-      renderLargerThumbnail: true
-      }
-      }}, {
-                        quoted: m
-                    })
-} else if(global.menutype === "v5") {
-  Subzero.sendMessage(m.chat, {
-                        image: fs.readFileSync('./Assets/pic7.jpg'),
-                        caption: helpMenuText
-                    }, {
-                        quoted: m
-                    })
-} else return
-}
+        } catch (error) {
+          console.error('Error generating and relaying message:', error);
+          return reply('Error generating and relaying message.');
+        }
 
         break;
-    
-    case 'menutype': {
-      if (isBan) return m.reply(mess.banned)
-		  if (isBanChat) return m.reply(mess.bangc);
-      if (!isCreator) return m.reply(mess.botowner)
-      if(!args[0]) return reply(`Select a menu type\n\nv1 - reply button\nv2 - status reply\nv3 - Looped menu\nv4 - Video Menu\nv5 - image menu`)
-      if(args[0].startsWith('v')) {
-        global.menutype = args[0]
-        reply(`Menu type Successfully changed to ${args[0]}`)
-      } else reply(`type ${prefix}menutype to see available menus.`)
-    }
-break;
+      }
 
+        
+
+	
       case '':
         if (isCmd) {
           if (isBan) return reply(mess.banned);
