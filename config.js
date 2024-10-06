@@ -10,8 +10,8 @@ global.antitags = false;
 
 
 //auto functioner
-global.autoTyping = false;                //make true to enable auto typing
-global.autoRecord = true;                //make true to enable auto recording
+global.autoTyping = true;                //make true to enable auto typing
+global.autoRecord = false;                //make true to enable auto recording
 global.groupevent = true;                //This is the new variable for controlling group event handling.
 global.statusseen = false;                 //make true to view statuses 
 global.ANTI_BOT = false;
@@ -20,14 +20,14 @@ global.CHATBOT = false;
 
 global.SESSION_ID = process.env.SESSION_ID || "taira_tech-uhcT1bbI#oMv1kPF90oENHwHf-JMd07egLXFD6bATmwxAsMpZN2M"
 global.Owner = ["263719747303"]; //like 2347080968564 
-global.OwnerName =  "Tᴀɪʀᴀ Mᴀᴋɪɴᴏ";
-global.BotName = "♱MAKINO-MD-V2♱♡⃤";
+global.OwnerName =  "Mr Mucheri";
+global.BotName = "EcoBot Digital ";
 global.packname = "♱MAKINO-MD-V2♱♡⃤";                             //Do not change.
 global.author = "TAIRA MAKINO";                               //Do not change.
 global.BotSourceCode = "https://github.com/anonphoenix007/MAKINO-MD-V2"; //Do not change.
 global.SupportGroupLink = "https://chat.whatsapp.com/DOVRqF006VHHZhiSNwJRce"; 
 global.SupportGroupLink = "https://chat.whatsapp.com/DOVRqF006VHHZhiSNwJRce"; //Do not change!
-global.menutype = "v3"
+global.menutype = "v1"
 
 global.prefa = ['','!','.',','] 
 
