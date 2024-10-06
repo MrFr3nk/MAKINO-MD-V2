@@ -58,7 +58,7 @@ async function TairaStart() {
 const store = makeInMemoryStore({ logger: pino().child({ level: 'silent', stream: 'store' }) });
 const { state, saveCreds } = await useMultiFileAuthState('./taira_baileys'); 
 const { version, isLatest } = await fetchLatestBaileysVersion();
-console.log(`Starting MAKINO-MD-V2 using WhatsApp version v${version.join('.')}, isLatest: ${isLatest}`);
+console.log(`Starting Ecobot using WhatsApp version v${version.join('.')}, isLatest: ${isLatest}`);
 	
 const resolveMsgBuffer = new NodeCache()
 
@@ -76,7 +76,7 @@ const Taira = TairaConnect({
                     const msg = await store.loadMessage(key.remoteJid, key.id);
                     return msg.message || undefined;
                 }
-                return { conversation: "MAKINO-MD-V2 🙂⃤ 🙂⃤ταιяα мακιиο" };
+                return { conversation: "Ecobot by Mr Frank" };
     }
 })
 
@@ -233,7 +233,7 @@ Taira.setStatus = (status) => {
           console.log("Connection to WhatsApp successful ✅");
           console.log("Welcome to MAKINO-MD-V2 ✨");
           const userName = Taira.user.name ? Taira.user.name : global.BotName;
-          console.log('♱ MAKINO-MD-V2 User Info');
+          console.log('♱ Ecobot User Info');
           console.log(`♱ Name     : ${userName}`);
           console.log(`♱ Number   : ${Taira.user.id.split(':')[0]}`);
           console.log(`♱ Status   : Connected`);
@@ -241,14 +241,14 @@ Taira.setStatus = (status) => {
           const long = String.fromCharCode(8206);
           const readmore = long.repeat(4001);  
           let uinfo = `
-          ♱ MAKINO-MD-V2 User Info
+          ♱ ecobot User Info
           ♱ Name     : ${userName}
           ♱ Number   : ${Taira.user.id.split(':')[0]}
           ♱ Status   : Connected
           ♱ Version: : ${packageVersion}
           ♱ Prefix   : ${global.prefa}
-          ♱ Creator  : https://t.me/Tha_Healer
-          ♱ GitHub   : https://github.com/anonphoenix007
+          ♱ Creator  : https://t.me/mrfrankofc
+          ♱ GitHub   : https://github.com/MrFr3nk
 	  
           change prefix with setprefix command!
           ` 
